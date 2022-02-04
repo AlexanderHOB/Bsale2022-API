@@ -31,25 +31,17 @@ app.use((err, req, res, next) => {
     });
 })
 
-// Conexión con la base de datos
-sequelize
-    .sync()
-    .then(result=>{
+const connect = async()=>{
+    try {
+        await sequelize.authenticate();
+        console.log('Connection has been established successfully.');
         app.listen(3000);
+    } catch (error) {
+        console.error('Unable to connect to the database:', error);
     }
-)
-// const connect = async()=>{
-//     try {
-//         await sequelize.authenticate();
-//         console.log('Connection has been established successfully.');
-//         app.listen(3000);
-    
-//     } catch (error) {
-//         console.error('Unable to connect to the database:', error);
-//     }
-// }
-// connect();
-// app.listen(3000);
+}
+connect();
+
 
 
 
