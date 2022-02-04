@@ -6,9 +6,12 @@ const Sequelize = require('sequelize');
  * @params {string} - Contraseña del usuario
  * @params {object} - Configuraciones de la base de datos
  */
-const sequelize = new Sequelize('bsale_test','bsale_test','bsale_test',{
+// const sequelize = new Sequelize('bsale_test','bsale_test','bsale_test',{
+//     dialect:'mysql',
+//     host:'mdb-test.c6vunyturrl6.us-west-1.rds.amazonaws.com'
+// });
+const sequelize = new Sequelize('bsale_test','root','P@ssw0rd',{
     dialect:'mysql',
-    host:'mdb-test.c6vunyturrl6.us-west-1.rds.amazonaws.com'
+    host:'localhost'
 });
-
 module.exports = sequelize;
