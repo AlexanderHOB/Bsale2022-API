@@ -1,4 +1,5 @@
-const Category = require("../models/Category")
+const Category = require("../models/Category");
+const Product = require("../models/Product");
 
 
 
@@ -16,7 +17,8 @@ exports.getAllCategories = (req, res, next) => {
     .then(categories=>{
         res.status(200).json({
             message:'Categorias obtenidas correctamente!',
-            categories,
+            count:categories.count,
+            data:[...categories.rows]
         });
     })
     .catch(err => {
@@ -39,7 +41,7 @@ exports.getCategoryById = (req,res,next)=>{
             }
             res.status(200).json({
                 message:'Categoria obtenida correctamente!',
-                category,
+                data:category,
             });
         })
         .catch(err=>{
@@ -48,5 +50,37 @@ exports.getCategoryById = (req,res,next)=>{
             }
             next(err);
         })
+
+}
+//Obtener la categoria por su Id
+exports.getProductByCategory = (req,res,next)=>{
+    const categoryId = req.params.categoryId; //obtener la id del producto de la URI
+    const currentPage = req.query.page || 1; //Pagina solicitada
+    const perPage = req.query.perPage|| 20; // Cantidad de productos a mostrar
+    Product.findAndCountAll({
+        where:{
+            category:categoryId
+        },
+        limit: perPage,
+        offset: (currentPage-1) * perPage,
+    })
+    .then(products=>{
+        if(!products){
+            const error = new Error ('Productos no encontrados');
+            error.statusCode = 404;
+            throw error;
+        }
+        res.status(200).json({
+            message:'Productos obtenidos correctamente!',
+            count:products.count,
+            data:[...products.rows],
+        });
+    })
+    .catch(err=>{
+        if(!err.statusCode){
+            err.statusCode = 500;
+        }
+        next(err);
+    })
 
 }

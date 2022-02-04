@@ -7,7 +7,7 @@ exports.getAllProducts = (req, res, next) => {
     const currentPage = req.query.page || 1; //Pagina solicitada
     const perPage = req.query.perPage|| 20; // Cantidad de productos a mostrar
     const orderBy = req.query.orderBy || 'id'; // ordenar en base a un atributo
-    const name = req.query.q || null;
+    const name = req.query.name || null;
 
     
     if(name){
@@ -23,7 +23,8 @@ exports.getAllProducts = (req, res, next) => {
         .then(products=>{
             res.status(200).json({
                 message:'Productos obtenidos correctamente!',
-                products,
+                count: products.count,
+                data:[...products.rows],
             });
         })
         .catch(err => {
@@ -42,7 +43,8 @@ exports.getAllProducts = (req, res, next) => {
     .then(products=>{
         res.status(200).json({
             message:'Productos obtenidos correctamente!',
-            products,
+            count: products.count,
+            data:[...products.rows],
         });
     })
     .catch(err => {
@@ -66,7 +68,7 @@ exports.getProductById = (req,res,next)=>{
             }
             res.status(200).json({
                 message:'Producto obtenidos correctamente!',
-                product,
+                data:product,
             });
         })
         .catch(err=>{
