@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const sequelize = require('./utils/database'); // SQL ORM para MYSQL
+const cors = require('cors');
 //Rutas
 const productRoutes = require('./routers/product');
 const categoryRoutes = require('./routers/category');
@@ -10,6 +11,8 @@ const app = express();
 
 //Configuración del body parser para aceptar JSON
 app.use(bodyParser.json());
+//cors
+app.use(cors());
 //rutas
 app.use('/apiv1',productRoutes);
 app.use('/apiv1',categoryRoutes);
