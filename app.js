@@ -1,13 +1,25 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const sequelize = require('./utils/database'); // SQL ORM para MYSQL
-const productRoutes = require('./routers/products');
+//Rutas
+const productRoutes = require('./routers/product');
+const categoryRoutes = require('./routers/category');
+
+
 const app = express();
 
 //Configuración del body parser para aceptar JSON
 app.use(bodyParser.json());
 //rutas
 app.use('/apiv1',productRoutes);
+app.use('/apiv1',categoryRoutes);
+
+
+app.get('*', (req, res,next) => {
+    res.status(404).json({
+        message: 'Página no encontrada'
+    });
+});
 // middleware que captura los errores
 app.use((err, req, res, next) => {
     const status = err.statusCode || 500;
