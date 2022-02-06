@@ -1,58 +1,47 @@
 const Product = require("../models/Product")
 const { Op } = require("sequelize");
-
+const getPagingData = require("../utils/paginate");
 
 //Obtener todos los productos
-exports.getAllProducts = (req, res, next) => {
+exports.getAllProducts = async(req, res, next) => {
     const currentPage = req.query.page || 1; //Pagina solicitada
-    const perPage = req.query.perPage|| 20; // Cantidad de productos a mostrar
+    const perPage = req.query.perPage|| 2; // Cantidad de productos a mostrar
     const orderBy = req.query.orderBy || 'id'; // ordenar en base a un atributo
-    const name = req.query.name || null;
-
-    
-    if(name){
-        Product.findAndCountAll({
-            where:{name:{
-                [Op.substring]:name
-                }
-            },
-            order: [orderBy],
-            limit: perPage,
-            offset: (currentPage-1) * perPage,
-        })
-        .then(products=>{
-            res.status(200).json({
-                message:'Productos obtenidos correctamente!',
-                count: products.count,
-                data:[...products.rows],
+    const name = req.query.name || null; 
+    let products;
+    try{
+        if(name){
+            products = await Product.findAndCountAll({
+                        where:{name:{
+                            [Op.substring]:name
+                            }
+                        },
+                        order: [orderBy],
+                        limit: perPage,
+                        offset: (currentPage-1) * perPage,
+                    });
+        }else{
+            products = await Product.findAndCountAll({
+                order: [orderBy],
+                limit: perPage,
+                offset: (currentPage-1) * perPage,
             });
-        })
-        .catch(err => {
-            if(err.statusCode){
-                err.statusCode = 500;
-            }
-            next(err);
-        });
-    }
-    //Consulta a travéz de sql sequelize
-    Product.findAndCountAll({
-        order: [orderBy],
-        limit: perPage,
-        offset: (currentPage-1) * perPage,
-    })
-    .then(products=>{
+        }
+        
+        const {totalItems,totalPages} = getPagingData(products,currentPage,perPage);
         res.status(200).json({
             message:'Productos obtenidos correctamente!',
-            count: products.count,
             data:[...products.rows],
+            totalItems,
+            totalPages,
+            currentPage
         });
-    })
-    .catch(err => {
+    }catch(err){
         if(err.statusCode){
             err.statusCode = 500;
         }
         next(err);
-    });
+    }
     
 }
 
