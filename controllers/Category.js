@@ -1,5 +1,6 @@
 const Category = require("../models/Category");
 const Product = require("../models/Product");
+const getPagingData = require("../utils/paginate");
 
 
 
@@ -56,7 +57,7 @@ exports.getCategoryById = (req,res,next)=>{
 exports.getProductByCategory = (req,res,next)=>{
     const categoryId = req.params.categoryId; //obtener la id del producto de la URI
     const currentPage = req.query.page || 1; //Pagina solicitada
-    const perPage = req.query.perPage|| 20; // Cantidad de productos a mostrar
+    const perPage = req.query.perPage|| 4; // Cantidad de productos a mostrar
     Product.findAndCountAll({
         where:{
             category:categoryId
@@ -70,10 +71,15 @@ exports.getProductByCategory = (req,res,next)=>{
             error.statusCode = 404;
             throw error;
         }
+        const {totalItems,totalPages} = getPagingData(products,currentPage,perPage);
+
         res.status(200).json({
             message:'Productos obtenidos correctamente!',
             count:products.count,
             data:[...products.rows],
+            totalItems,
+            totalPages,
+            currentPage
         });
     })
     .catch(err=>{
