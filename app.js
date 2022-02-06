@@ -35,13 +35,16 @@ app.use((err, req, res, next) => {
 })
 
 const connect = async()=>{
-    try {
-        await sequelize.authenticate();
-        console.log('Connection has been established successfully.');
-        app.listen(process.env.PORT || 5000)
-    } catch (error) {
-        console.error('Unable to connect to the database:', error);
-    }
+    app.listen(process.env.PORT || 5000,async()=>{
+        try {
+            await sequelize.authenticate();
+            console.log('Connection has been established successfully.');
+            
+        } catch (error) {   
+            console.error('Unable to connect to the database:', error);
+            setTimeout(await sequelize.authenticate(), 5000);
+        }
+    })
 }
 connect();
 
