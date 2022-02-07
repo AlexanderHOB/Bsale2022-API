@@ -205,18 +205,18 @@ GET apiv1/categories/:categoryId
 Desarrollo del API en Nodejs
 ### Estructura
 Se utilizó la arquitectura MVC para el desarrollo del API del ejercicio, y se estructuro los archivos de la siguiente manera:
-    -Controllers
-        -Category
-        -Product
-    -models
-        -Category
-        -Product
-    -routers
-        -Category
-        -product
-    -utils
-        -database
-    -middleware
+- Controllers
+    -Category
+    -Product
+- models
+    -Category
+    -Product
+- routers
+    -Category
+    -product
+- utils
+    -database
+- middleware
 
 #### Controladores
     - Category
