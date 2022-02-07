@@ -30,7 +30,7 @@ Las peticiones son HTTP REST por lo que se debe especificar el método que se va
 
 Un ejemplo de petición utilizando cURL seria:
 ```sh
-    curl -X GET 
+    curl -X GET https://bsalebackend2022.herokuapp.com/apiv1/products
 ```
 # Ejemplos
 ### Productos
@@ -51,8 +51,7 @@ GET apiv1/products
 #### Respuesta
 ```json
     {
-        message: "Productos obtenidos correctamente!",
-        count:2,    
+        message: "Productos obtenidos correctamente!",    
         data:[
             {
                 id:1,
@@ -70,7 +69,10 @@ GET apiv1/products
                 discount:1,
                 category:1
             }
-        ]
+        ],
+        totalItems:13,
+        totalPages:10,
+        currentPage:1
     }
 ```
 
@@ -115,8 +117,7 @@ GET apiv1/categories/:categoryId/products
 #### Respuesta
 ```json
     {
-        message: "Productos obtenidos correctamente!",
-        count:2,    
+        message: "Productos obtenidos correctamente!",  
         data:[
             {
                 id:1,
@@ -134,7 +135,10 @@ GET apiv1/categories/:categoryId/products
                 discount:1,
                 category:1
             }
-        ]
+        ],
+        totalItems:13,
+        totalPages:10,
+        currentPage:1
     }
 ```
 
