@@ -204,7 +204,7 @@ GET apiv1/categories/:categoryId
 ## Explicación del Ejercicio
 Desarrollo del API en Nodejs
 ### Estructura
-Se utilizo la arquitectura MVC para el desarrollo del ejercicio, y se estructuro de la siguiente manera:
+Se utilizó la arquitectura MVC para el desarrollo del API del ejercicio, y se estructuro los archivos de la siguiente manera:
     -Controllers
         -Category
         -Product
@@ -229,8 +229,8 @@ Se utilizo la arquitectura MVC para el desarrollo del ejercicio, y se estructuro
             1. getAllProducts - Encargado de ejecutar la consulta para extraer todos los productos en base a los parámetros y retornar la respuesta en formato JSON.
             2. getProductById - Encargado de ejecutar la consulta para extraer un producto en específico filtrado por su identificador.
 #### Models
-    Utilizando *sequelize* se creo los modelos de las dos entidades.
+    Utilizando *sequelize* se creo los modelos de las dos entidades, anunciando los atributos que contenian.
 #### Routers
-    Contiene las rutas y sus respectivos métodos HTTP
+    Contiene las rutas y sus respectivos métodos HTTP.
 #### utils
     Contiene la configuración para conectarse a la Base de Datos. Utiliza **Environment Variables**
