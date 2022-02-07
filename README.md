@@ -1,6 +1,17 @@
 # Bsale2022-API
 API Rest Bsale 2022
 Bienvenido a la documentación del API REST de BSALE 2022, la cual permite acceder a un conjunto de endpoints orientado a facilitar la integración, con sistemas externos. Por ejemplo, se puede obtener la lista de productos y sus respectivas categorías.
+### Tecnologías
+1. Entorno de ejecución - Node js
+2. Framework - Express
+3. Consultas ORM - Sequelize
+### Despliegue
+```bash
+    npm install
+```
+```bash
+    node app.js
+```
 # Contenidos
 * [Introducción](#introduccion)
 * [Ejemplos de Consultas](#ejemplos)
@@ -206,19 +217,20 @@ Desarrollo del API en Nodejs
 ### Estructura
 Se utilizó la arquitectura MVC para el desarrollo del API del ejercicio, y se estructuro los archivos de la siguiente manera:
 - Controllers
-    -Category
-    -Product
+    - Category
+    - Product
 - models
-    -Category
-    -Product
+    - Category
+    - Product
 - routers
-    -Category
-    -product
+    - Category
+    - Product
 - utils
-    -database
+    - database
 - middleware
 
 #### Controladores
+Emplear la lógica de consulta y respuesta de los datos, se utilizó [sequelize] (https://sequelize.org/master/index.html) para las consultas, siendo un ORM que permite evitar **SQL Injections**.  
     - Category
         Contiene las siguientes funciones:
             1. getAllCategories - Encargado de ejecutar la consulta para extraer todas las categorias en base a los parámetros y retornar la respuesta en formato JSON.
