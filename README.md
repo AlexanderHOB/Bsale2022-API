@@ -17,6 +17,8 @@ Bienvenido a la documentación del API REST de BSALE 2022, la cual permite acced
 - Respuesta en una estructura JSON con los atributos en camelCase.
 - Manejo de versiones en la URL.
 - Paginación de la respuesta en JSON.
+- Empleo de ORM Sequelize.
+- Evita ataques SQL Injection con ORM.
 
 
 

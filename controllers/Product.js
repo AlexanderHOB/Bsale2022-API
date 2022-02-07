@@ -5,11 +5,12 @@ const getPagingData = require("../utils/paginate");
 //Obtener todos los productos
 exports.getAllProducts = async(req, res, next) => {
     const currentPage = req.query.page || 1; //Pagina solicitada
-    const perPage = req.query.perPage|| 4; // Cantidad de productos a mostrar
+    const perPage = req.query.perPage|| 20; // Cantidad de productos a mostrar
     const orderBy = req.query.orderBy || 'id'; // ordenar en base a un atributo
     const name = req.query.name || null; //filtrar por nombre
     let products;
     try{
+        //Verificar si se debe filtrar por nombre
         if(name){
             products = await Product.findAndCountAll({
                         where:{name:{
@@ -29,6 +30,7 @@ exports.getAllProducts = async(req, res, next) => {
         }
         //obtener totalItems,TotalPages
         const {totalItems,totalPages} = getPagingData(products,currentPage,perPage);
+        //respuesta de la consulta
         res.status(200).json({
             message:'Productos obtenidos correctamente!',
             data:[...products.rows],

@@ -17,7 +17,7 @@ app.use(cors());
 app.use('/apiv1',productRoutes);
 app.use('/apiv1',categoryRoutes);
 
-
+//middleware de error en páginas no encontradas
 app.get('*', (req, res,next) => {
     res.status(404).json({
         message: 'Página no encontrada'
@@ -37,11 +37,13 @@ app.use((err, req, res, next) => {
 const connect = async()=>{
     app.listen(process.env.PORT || 5000,async()=>{
         try {
+            //Se emplea ORM sequelize para evitar ataques de SQLInjection, ya que transforma la data en objetos
             await sequelize.authenticate();
             console.log('Connection has been established successfully.');
             
         } catch (error) {   
             console.error('Unable to connect to the database:', error);
+            //reintentarse conectarse con la base de datos
             setTimeout(await sequelize.authenticate(), 5000);
         }
     })

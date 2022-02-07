@@ -7,7 +7,7 @@ const getPagingData = require("../utils/paginate");
 //Obtener todas las categorias
 exports.getAllCategories = (req, res, next) => {
     const currentPage = req.query.page || 1; //Pagina solicitada
-    const perPage = 10; // Cantidad de productos a mostrar
+    const perPage = 20; // Cantidad de productos a mostrar
     const orderBy = req.query.orderBy || 'id'; // ordenar en base a un atributo
     //Consulta a travéz de sql sequelize
     Category.findAndCountAll({
@@ -57,7 +57,7 @@ exports.getCategoryById = (req,res,next)=>{
 exports.getProductByCategory = (req,res,next)=>{
     const categoryId = req.params.categoryId; //obtener la id del producto de la URI
     const currentPage = req.query.page || 1; //Pagina solicitada
-    const perPage = req.query.perPage|| 4; // Cantidad de productos a mostrar
+    const perPage = req.query.perPage|| 20; // Cantidad de productos a mostrar
     Product.findAndCountAll({
         where:{
             category:categoryId
