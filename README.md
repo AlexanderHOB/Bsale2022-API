@@ -230,22 +230,20 @@ Se utilizó la arquitectura MVC para el desarrollo del API del ejercicio, y se e
 - middleware
 
 #### Controladores
-Emplear la lógica de consulta y respuesta de los datos, se utilizó [sequelize] (https://sequelize.org/master/index.html) para las consultas, siendo un ORM que permite evitar **SQL Injections** 
+Emplear la lógica de consulta y respuesta de los datos, se utilizó [sequelize](https://sequelize.org/master/index.html) para las consultas, siendo un ORM que permite evitar **SQL Injections** 
 
-- Category
-    Contiene las siguientes funciones:
-        1. getAllCategories - Encargado de ejecutar la consulta para extraer todas las categorias en base a los parámetros y retornar la respuesta en formato JSON.
-        2. getCategoryById - Encargado de ejecutar la consulta para extraeruna categoría en específico filtrado por su identificador.
-        3. getProductByCategory - Encargado de ejecutar la consulta que extrae todos los productos filtrado por su categoria.
-- Product
-    Contiene las siguientes funciones:
-        1. getAllProducts - Encargado de ejecutar la consulta para extraer todos los productos en base a los parámetros y retornar la respuesta en formato JSON.
-        2. getProductById - Encargado de ejecutar la consulta para extraer un producto en específico filtrado por su identificador.
+- Category - Contiene las siguientes funciones:
+    1. *getAllCategories* - Encargado de ejecutar la consulta para extraer todas las categorias en base a los parámetros y retornar la respuesta en formato JSON.
+    2. *getCategoryById* - Encargado de ejecutar la consulta para extraeruna categoría en específico filtrado por su identificador.
+    3. *getProductByCategory* - Encargado de ejecutar la consulta que extrae todos los productos filtrado por su categoria.
+- Product - Contiene las siguientes funciones:
+    1. *getAllProducts* - Encargado de ejecutar la consulta para extraer todos los productos en base a los parámetros y retornar la respuesta en formato JSON.
+    2. *getProductById* - Encargado de ejecutar la consulta para extraer un producto en específico filtrado por su identificador.
    
    
 #### Models
-    Utilizando *sequelize* se creo los modelos de las dos entidades, anunciando los atributos que contenian.
+Utilizando *sequelize* se creo los modelos de las dos entidades, anunciando los atributos que contenian cada entidad (Producto y Categoría).
 #### Routers
-    Contiene las rutas y sus respectivos métodos HTTP.
+Contiene las rutas y sus respectivos métodos HTTP.
 #### utils
-    Contiene la configuración para conectarse a la Base de Datos. Utiliza **Environment Variables**
+Contiene la configuración para conectarse a la Base de Datos. Utiliza **Environment Variables**
